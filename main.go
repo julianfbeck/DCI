@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"sort"
 )
@@ -12,7 +13,10 @@ func MergeIntervals(intervals [][]int) ([][]int, error) {
 	if len(intervals) == 0 {
 		return [][]int{}, nil
 	}
-
+	//check if the provided intervals array is valid
+	if !validateIntervals(intervals) {
+		return nil, errors.New("invalid intervals")
+	}
 	// sort intervals by first value
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
@@ -33,6 +37,16 @@ func MergeIntervals(intervals [][]int) ([][]int, error) {
 	}
 
 	return results, nil
+}
+
+//validates that the end value of the interval is greater or equal than the start value
+func validateIntervals(intervals [][]int) bool {
+	for i := 0; i < len(intervals); i++ {
+		if intervals[i][0] > intervals[i][1] {
+			return false
+		}
+	}
+	return true
 }
 
 func maxOf(a, b int) int {
