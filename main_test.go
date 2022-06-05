@@ -61,3 +61,51 @@ func Test_mergeInterval(t *testing.T) {
 		assert.Equal(t, testCase.expected, got, "should merge intervals")
 	}
 }
+
+func Test_mergeIntervalForEmptyInterval(t *testing.T) {
+	intervals := [][]int{}
+
+	expected := [][]int{}
+
+	got, err := MergeIntervals(intervals)
+	assert.Nil(t, err, "should not return error")
+	assert.Equal(t, expected, got, "should return empty array")
+}
+
+func Test_mergeIntervalForInvalidInterval(t *testing.T) {
+	intervals := [][]int{
+		{1, 4},
+		{2, 3},
+		{4, 5},
+		{5, 4},
+	}
+
+	_, err := MergeIntervals(intervals)
+	assert.NotNil(t, err, "should return error")
+}
+
+func Test_max(t *testing.T) {
+	assert.Equal(t, 5, maxOf(5, 3))
+	assert.Equal(t, 5, maxOf(5, 5))
+	assert.Equal(t, 3, maxOf(3, 3))
+}
+
+func Test_validateIntervals(t *testing.T) {
+	for _, testCase := range validateIntervalsTestCases {
+		got := validateIntervals(testCase.intervals)
+		assert.Equal(t, testCase.expected, got, "should validate intervals")
+	}
+}
+
+func Benchmark_mergeIntervals(b *testing.B) {
+	intervals := [][]int{
+		{1, 3},
+		{2, 6},
+		{8, 10},
+		{15, 18},
+	}
+
+	for i := 0; i < b.N; i++ {
+		MergeIntervals(intervals)
+	}
+}
