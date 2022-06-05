@@ -24,6 +24,7 @@ The Robustness can be improve by:
 The Scalability can be improve by:
 - Splitting the array into smaller chunks and merging them (using goroutines).
   - This will reduce the time used to sort the complete array.
+  - Sample implementation can be found in the `merge_intervals_sample.go` file.
 - For large memory usage a worker pool can be used.
 
 ### Implementation Details:
@@ -74,6 +75,10 @@ make install
 make test
 ```
 This will install the testify package and also generate a coverage report.
+To only run the tests run the following command in the terminal:
+```
+go test -v ./...
+```
 
 Alternatively, docker can be used to execute the tests locally directly in a container
 ```
