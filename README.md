@@ -58,6 +58,16 @@ If the current and next interval overlap, we merge them into the result. If not 
 
 ## Execution:
 
+The current implementation uses the testify library to test the algorithm.
+Therefore we need to install the testify library.
+```
+make install
+```
+or 
+```
+go get github.com/stretchr/testify/assert
+```
+
 To execute the code run the following command in the terminal:
 ```
 make run
