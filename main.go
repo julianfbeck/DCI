@@ -6,7 +6,9 @@ import (
 	"sort"
 )
 
-//Merges an array of intervals into a single interval.
+//Merges overlapping intervals in to one interval
+//An interval is a slice of length 2, where the first element is the start value and the second element is the end value
+//Returns an error if the input is not valid
 func MergeIntervals(intervals [][]int) ([][]int, error) {
 
 	//return empty array if intervals is empty

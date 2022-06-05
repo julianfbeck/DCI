@@ -20,6 +20,7 @@ The Robustness can be improve by:
 - Using Custom types to represent the intervals.(i.e. struct Interval { int start; int end; })
 - Using a package to represent the intervals.
 - Add logging to the algorithm.
+- Use a separate package to contain the algorithm, (i.e. package merge) and only expose the MergeIntervals function.
 
 The Scalability can be improve by:
 - Splitting the array into smaller chunks and merging them (using goroutines).
