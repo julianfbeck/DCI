@@ -1,4 +1,4 @@
-# Coding Task 2 ![](https://github.com/julianfbeck/DCI/actions/workflows/test.yml/badge.svg)
+# Coding Task 2 ![https://github.com/julianfbeck/DCI/actions/workflows/test.yml](https://github.com/julianfbeck/DCI/actions/workflows/test.yml/badge.svg)
 
 ## Question:
 Given an array of intervals, merge all overlapping intervals into one interval.
@@ -25,8 +25,36 @@ The Scalability can be improve by:
 - Splitting the array into smaller chunks and merging them (using goroutines).
   - This will reduce the time used to sort the complete array.
 - For large memory usage a worker pool can be used.
-## Execution:
 
+### Implementation Details:
+We sort the array of intervals first. This makes all subsequent operations a lot easier.
+We start with the first interval in the result interval. Next we iterate over the rest of the intervals and merge them into the result.
+Herby we check the max value of the result or current interval to determine the ending position of the result interval.
+If the current and next interval overlap, we merge them into the result. If not we just add the current interval to the result.
+
+#### Example Walkthrough:
+- Input: [[1, 3], [8, 10], [2, 6]]
+- Step 1: Sort the intervals by start value.
+  - Input: [[1, 3], [2, 6], [8, 10]]
+  - Results: []
+- Step 2: Populate the result array with the first interval.
+  - Input: [[1, 3], [2, 6], [8, 10]]
+  - Results: [[1, 3]] 
+- Step 3: loop through the Intervals index = 1. 
+  - Input: [[1, 3], [2, 6], [8, 10]]	
+  - Results: [[1, 3]]
+  - Index Interval: [2, 6]
+  - Check if the start of the current interval [2,6] is smaller or equal than the end in the last element of the result [1,3] array: 2 <= 3: True
+    - True: Update the end of the last result element with the max value of the last result value or the current interval end value: max(3, 6) = 6
+- Step 3: (continued) index = 2.
+  - Input: [[1, 3], [2, 6], [8, 10]]
+  - Results: [[1, 6]]
+  - Index Interval: [8, 10]
+  - Check if the start of the current interval [8,10] is smaller or equal than the end in the last element of the result [1,6] array: 8 <= 6: False
+    - False: Append the current interval to the result array: [[1, 6], [8, 10]]
+
+
+## Execution:
 
 To execute the code run the following command in the terminal:
 ```
